@@ -1,0 +1,876 @@
+@import "tailwindcss";
+@import "./piezas.css";
+@import "./paginas.css";
+
+/* ------------------------------------------------------------------
+   Los tres HEX de marca los inyecta layout.tsx desde src/content/marca.ts
+   (--verde, --oro, --crema y los derivados por accesibilidad).
+   Este archivo NO declara ningún color de marca: así el cambio entre
+   opción A y opción B es un solo archivo.
+   ------------------------------------------------------------------ */
+
+@theme inline {
+  --color-verde: var(--verde);
+  --color-verde-tinta: var(--verde-tinta);
+  --color-oro: var(--oro);
+  --color-oro-tinta: var(--oro-tinta);
+  --color-oro-claro: var(--oro-claro);
+  --color-texto-atenuado: var(--texto-atenuado);
+  --color-crema-atenuada: var(--crema-atenuada);
+  --color-crema: var(--crema);
+  --color-papel: var(--papel);
+
+  --font-display: var(--fuente-display);
+  --font-sans: var(--fuente-texto);
+}
+
+:root {
+  /* superficies derivadas del oro: le dan presencia como color de fondo,
+     no solo como detalle de línea */
+  --oro-velo: color-mix(in srgb, var(--oro) 12%, var(--crema));
+  --oro-velo-fuerte: color-mix(in srgb, var(--oro) 22%, var(--crema));
+  --oro-linea: color-mix(in srgb, var(--oro) 55%, transparent);
+  --verde-velo: color-mix(in srgb, var(--verde) 6%, var(--crema));
+
+  --medida: 68ch;
+  --gutter: 1.25rem;
+  --radio: 2px;
+
+  /* Alto real de la cabecera. El hero le resta este valor para ocupar
+     exactamente el resto de la pantalla sin que se corte el contenido. */
+  --alto-cabecera: 85px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gutter: 2.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --gutter: 4rem;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--crema);
+  color: var(--verde);
+  font-family: var(--fuente-texto), system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--fuente-display), Georgia, serif;
+  font-variation-settings: "SOFT" 0, "WONK" 0;
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  margin: 0;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--oro-tinta);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+/* ------------------------------ layout ------------------------------ */
+
+.envoltura {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.estrecho {
+  max-width: var(--medida);
+}
+
+.seccion {
+  padding-block: clamp(3.5rem, 9vw, 7.5rem);
+}
+
+/* ------------------------- tipografía display ------------------------ */
+
+.display-xl {
+  font-size: clamp(2.375rem, 6.2vw, 4.75rem);
+}
+
+.display-l {
+  font-size: clamp(2rem, 5vw, 3.75rem);
+}
+
+.display-m {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+/* ---------------------- el oro como sistema, no acento ---------------- */
+
+/* Antetítulo: oro tinta (AA sobre crema) + filete de oro de marca */
+.antetitulo {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  font-family: var(--fuente-texto), sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--oro-tinta);
+  margin: 0 0 1.25rem;
+}
+
+.antetitulo::before {
+  content: "";
+  width: clamp(1.75rem, 4vw, 3rem);
+  height: 2px;
+  background: var(--oro);
+  flex: none;
+}
+
+/* Filete de oro: el separador estructural del sitio */
+.filete {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    var(--oro) 0%,
+    var(--oro-linea) 55%,
+    transparent 100%
+  );
+  margin: 0;
+}
+
+/* Superficie de oro velado: bandas enteras del sitio, no detalles */
+.superficie-oro {
+  background: var(--oro-velo);
+}
+
+.superficie-verde {
+  background: var(--verde);
+  color: var(--crema);
+}
+
+.superficie-verde .antetitulo {
+  color: var(--oro-claro);
+}
+
+.superficie-verde .antetitulo::before {
+  background: var(--oro-claro);
+}
+
+.superficie-verde .filete {
+  background: linear-gradient(
+    to right,
+    var(--oro-claro) 0%,
+    color-mix(in srgb, var(--oro-claro) 40%, transparent) 55%,
+    transparent 100%
+  );
+}
+
+/* Índice numerado en oro: marca jerarquía en todas las secciones */
+.indice {
+  font-family: var(--fuente-display), serif;
+  font-size: 0.8125rem;
+  letter-spacing: 0.05em;
+  color: var(--oro-tinta);
+  border: 1px solid var(--oro-linea);
+  border-radius: 999px;
+  width: 2.75rem;
+  height: 2.75rem;
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+
+.superficie-verde .indice {
+  color: var(--oro-claro);
+  border-color: color-mix(in srgb, var(--oro-claro) 45%, transparent);
+}
+
+/* ------------------------------ botones ------------------------------ */
+
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  padding: 0.9375rem 1.75rem;
+  font-family: var(--fuente-texto), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.015em;
+  text-decoration: none;
+  border-radius: var(--radio);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease,
+    border-color 0.2s ease;
+  min-height: 48px;
+}
+
+/* Primario: superficie de oro de marca con tinta verde profunda (AA) */
+.boton-oro {
+  background: var(--oro);
+  color: var(--verde-tinta);
+  border-color: var(--oro);
+}
+
+.boton-oro:hover {
+  background: color-mix(in srgb, var(--oro) 82%, var(--verde));
+  border-color: color-mix(in srgb, var(--oro) 82%, var(--verde));
+}
+
+.boton-verde {
+  background: var(--verde);
+  color: var(--crema);
+  border-color: var(--verde);
+}
+
+.boton-verde:hover {
+  background: color-mix(in srgb, var(--verde) 88%, #000);
+}
+
+.boton-linea {
+  background: transparent;
+  color: var(--verde);
+  border-color: var(--oro-linea);
+}
+
+.boton-linea:hover {
+  background: var(--oro-velo);
+  border-color: var(--oro);
+}
+
+.superficie-verde .boton-linea {
+  color: var(--crema);
+  border-color: color-mix(in srgb, var(--oro-claro) 50%, transparent);
+}
+
+.superficie-verde .boton-linea:hover {
+  background: color-mix(in srgb, var(--oro-claro) 14%, transparent);
+  border-color: var(--oro-claro);
+}
+
+/* ------------------------------ tarjetas ----------------------------- */
+
+.tarjeta {
+  background: var(--papel);
+  border: 1px solid color-mix(in srgb, var(--verde) 12%, transparent);
+  border-top: 2px solid var(--oro);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+a.tarjeta:hover {
+  border-color: var(--oro-linea);
+  border-top-color: var(--oro);
+  transform: translateY(-2px);
+}
+
+/* Marco de oro para fotografía: el oro toca la imagen real */
+.marco-foto {
+  position: relative;
+  overflow: hidden;
+  background: var(--oro-velo);
+  border: 1px solid var(--oro-linea);
+}
+
+.marco-foto img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --------------------------- marcador PENDIENTE ---------------------- */
+
+.pendiente {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4375rem;
+  padding: 0.25rem 0.625rem;
+  background: #fff4d6;
+  border: 1px dashed #b05109;
+  color: #7c3a00;
+  font-family: var(--fuente-texto), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: 0;
+  text-transform: none;
+  border-radius: var(--radio);
+  vertical-align: middle;
+}
+
+.pendiente-bloque {
+  display: block;
+  padding: 1rem 1.125rem;
+}
+
+/* ------------------------- utilidades varias ------------------------- */
+
+.solo-lectores {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.saltar {
+  position: fixed;
+  z-index: 200;
+  top: -100px;
+  left: 1rem;
+  background: var(--oro);
+  color: var(--verde-tinta);
+  padding: 0.875rem 1.25rem;
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: top 0.15s ease;
+}
+
+.saltar:focus {
+  top: 0.75rem;
+}
+
+.rejilla {
+  display: grid;
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+}
+
+@media (min-width: 640px) {
+  .rejilla-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .rejilla-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* --------------------- aparición al hacer scroll --------------------- */
+
+.revelar {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.revelar.visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .revelar {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ==================================================================
+   CABECERA
+   ================================================================== */
+
+:root {
+}
+
+.cabecera {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: color-mix(in srgb, var(--crema) 92%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.cabecera-fila {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding: 0.75rem var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  min-height: 84px;
+}
+
+.cabecera-logo {
+  display: block;
+  flex: none;
+  line-height: 0;
+}
+
+.cabecera-logo img {
+  height: 50px;
+  width: auto;
+}
+
+.cabecera-nav {
+  display: none;
+  align-items: center;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cabecera-enlace {
+  position: relative;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  text-decoration: none;
+  white-space: nowrap;
+  border-radius: var(--radio);
+}
+
+.cabecera-enlace::after {
+  content: "";
+  position: absolute;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: 0.25rem;
+  height: 1.5px;
+  background: var(--oro);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+
+.cabecera-enlace:hover::after,
+.cabecera-enlace.activo::after {
+  transform: scaleX(1);
+}
+
+.cabecera-enlace.activo {
+  color: var(--oro-tinta);
+}
+
+.cabecera-acciones {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: none;
+}
+
+.cabecera-cta {
+  display: none;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.8125rem;
+  min-height: 44px;
+}
+
+.cabecera-menu {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: 1px solid var(--oro-linea);
+  border-radius: var(--radio);
+  cursor: pointer;
+  color: inherit;
+}
+
+.cabecera-menu span[aria-hidden] {
+  display: grid;
+  gap: 4px;
+  width: 20px;
+}
+
+.cabecera-menu i {
+  display: block;
+  height: 1.5px;
+  background: var(--verde);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.cabecera-menu .cruz i:nth-child(1) {
+  transform: translateY(5.5px) rotate(45deg);
+}
+
+.cabecera-menu .cruz i:nth-child(2) {
+  opacity: 0;
+}
+
+.cabecera-menu .cruz i:nth-child(3) {
+  transform: translateY(-5.5px) rotate(-45deg);
+}
+
+@media (min-width: 640px) {
+  .cabecera-cta {
+    display: inline-flex;
+  }
+}
+
+@media (min-width: 1140px) {
+  :root {
+    --alto-cabecera: 105px;
+  }
+  .cabecera-logo img {
+    height: 66px;
+  }
+  .cabecera-fila {
+    min-height: 104px;
+  }
+  .cabecera-nav {
+    display: flex;
+  }
+  .cabecera-menu {
+    display: none;
+  }
+}
+
+/* menú móvil */
+.movil {
+  position: fixed;
+  inset: 0;
+  top: 0;
+  z-index: 120;
+  background: var(--crema);
+  padding: 7rem var(--gutter) 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  overflow-y: auto;
+}
+
+.movil nav {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--oro-linea);
+}
+
+.movil-enlace {
+  font-family: var(--fuente-display), serif;
+  font-size: 1.5rem;
+  padding: 1rem 0;
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--verde) 12%, transparent);
+}
+
+.movil-cta {
+  margin-top: 1.75rem;
+  align-self: flex-start;
+}
+
+/* ==================================================================
+   ANIMACIÓN DE ENTRADA DEL LOGO
+   ================================================================== */
+
+/* Sin animación el overlay ni se monta visualmente: el logo de la cabecera
+   y el hero ya están en su sitio desde el primer pintado. */
+.intro-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  pointer-events: none;
+}
+
+html[data-intro="activa"] .intro-overlay {
+  /* Centrado por CSS, no por JS. Posicionar la caja desde el script provocaba
+     un salto de layout entre el primer pintado y la hidratación: CLS 0.149
+     medido con Playwright. Con el centrado en CSS el elemento nace donde
+     tiene que estar y GSAP solo le aplica transform. */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Estado de partida cuando la animación SÍ corre. A partir del primer
+   frame estos valores los gobierna GSAP con estilos inline. */
+html[data-intro="activa"] .cabecera-logo {
+  opacity: 0;
+}
+
+html[data-intro="activa"] .portada-velo {
+  opacity: 1;
+}
+
+html[data-intro="activa"] .portada-texto {
+  opacity: 0;
+}
+
+.intro-logo-caja {
+  width: min(62vw, 560px);
+  /* Centro óptico: algo por encima del centro geométrico. */
+  margin-bottom: 9vh;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+@media (max-width: 767px) {
+  .intro-logo-caja {
+    width: min(78vw, 320px);
+    margin-bottom: 6vh;
+  }
+}
+
+/* El SVG va inline, no como <img>: es lo que permite animar los trazos. */
+.intro-logo-caja svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.intro-pista {
+  position: fixed;
+  left: 50%;
+  bottom: clamp(1.5rem, 4vh, 2.75rem);
+  transform: translateX(-50%);
+  display: grid;
+  justify-items: center;
+  gap: 0.75rem;
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--oro-tinta);
+  white-space: nowrap;
+}
+
+.intro-pista i {
+  display: block;
+  width: 1px;
+  height: clamp(28px, 5vh, 46px);
+  background: linear-gradient(to bottom, var(--oro), transparent);
+}
+
+
+
+/* ==================================================================
+   PORTADA DEL INICIO
+   ================================================================== */
+
+.portada {
+  /* Valor de respaldo: IntroLogo lo sobrescribe con el recorrido real
+     para que el alto de la sección y la animación no se desincronicen.
+     Debe coincidir con recorrido() del componente o habrá salto de layout. */
+  --recorrido: 100vh;
+  position: relative;
+  height: calc(100svh - var(--alto-cabecera) + var(--recorrido));
+}
+
+.portada-fija {
+  position: sticky;
+  top: var(--alto-cabecera);
+  height: calc(100svh - var(--alto-cabecera));
+  overflow: hidden;
+  display: grid;
+}
+
+.portada-foto {
+  position: absolute;
+  inset: 0;
+}
+
+.portada-foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 42%;
+}
+
+/* Velo de lectura permanente: sostiene el texto sobre la foto real */
+.portada-lectura {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--verde) 30%, transparent) 0%,
+    color-mix(in srgb, var(--verde) 18%, transparent) 30%,
+    color-mix(in srgb, var(--verde) 72%, transparent) 72%,
+    color-mix(in srgb, var(--verde) 88%, transparent) 100%
+  );
+}
+
+/* Velo de entrada: crema opaca que se retira conforme baja el usuario */
+.portada-velo {
+  position: absolute;
+  inset: 0;
+  background: var(--crema);
+  /* Estado base = sin animación: el velo no existe. Solo lo enciende
+     html[data-intro="activa"], y a partir de ahí lo gobierna GSAP. */
+  opacity: 0;
+}
+
+.portada-texto {
+  position: relative;
+  align-self: end;
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding: 0 var(--gutter) clamp(2.5rem, 7vh, 5rem);
+  color: var(--crema);
+}
+
+.portada-texto .antetitulo {
+  color: var(--oro-claro);
+}
+
+.portada-texto .antetitulo::before {
+  background: var(--oro-claro);
+}
+
+.portada-titulo {
+  max-width: 17ch;
+}
+
+.portada-bajada {
+  max-width: 52ch;
+  margin: 1.5rem 0 0;
+  font-size: clamp(0.9375rem, 1.6vw, 1.125rem);
+  color: color-mix(in srgb, var(--crema) 88%, transparent);
+}
+
+.portada-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+/* Sobre fotografía el botón de línea necesita tinta clara, igual que en las
+   bandas verdes; con la tinta verde por defecto desaparece. */
+.portada-acciones .boton-linea {
+  color: var(--crema);
+  border-color: color-mix(in srgb, var(--oro-claro) 65%, transparent);
+  background: color-mix(in srgb, var(--verde) 42%, transparent);
+}
+
+.portada-acciones .boton-linea:hover {
+  background: color-mix(in srgb, var(--verde) 55%, transparent);
+  border-color: var(--oro-claro);
+}
+
+@media (max-width: 767px) {
+  .portada {
+    --recorrido: 75vh;
+  }
+}
+
+/* Sin animación la portada no necesita recorrido extra de scroll. */
+html:not([data-intro="activa"]) .portada {
+  height: calc(100svh - var(--alto-cabecera));
+}
+
+/* ==================================================================
+   AJUSTES DE MÓVIL QUE DEPENDEN DE LA CASCADA
+   Van aquí y no en paginas.css porque los @import se elevan al inicio
+   del archivo: cualquier regla de paginas.css con la misma especificidad
+   quedaría por detrás de las de este archivo.
+   ================================================================== */
+
+@media (max-width: 767px) {
+  /* El botón flotante de WhatsApp se superpone al CTA del hero:
+     se reserva el alto de la pastilla para que nada quede tapado. */
+  .portada-texto {
+    padding: 0 var(--gutter) 7rem;
+  }
+
+  /* En vertical el texto ocupa mucho más alto de la foto, así que el velo
+     de lectura tiene que empezar a cerrar antes. */
+  .portada-lectura {
+    background: linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--verde) 34%, transparent) 0%,
+      color-mix(in srgb, var(--verde) 26%, transparent) 18%,
+      color-mix(in srgb, var(--verde) 74%, transparent) 52%,
+      color-mix(in srgb, var(--verde) 92%, transparent) 100%
+    );
+  }
+
+  .portada-acciones,
+  .portada-acciones .boton {
+    width: 100%;
+  }
+}
+
+/* Legibilidad del bloque de portada sobre fotografía real: las fotos del
+   consultorio tienen zonas muy claras (mármol, batas, luz cálida) donde el
+   antetítulo en oro se perdía. Una sombra corta y muy difusa lo sostiene
+   sin ensuciar la tipografía. */
+.portada-texto .antetitulo,
+.portada-titulo,
+.portada-bajada {
+  text-shadow: 0 1px 14px color-mix(in srgb, var(--verde) 85%, transparent);
+}
+
+.portada-texto .antetitulo::before {
+  box-shadow: 0 1px 10px color-mix(in srgb, var(--verde) 85%, transparent);
+}
+
+/* El logo ya construido, cuando la animación no corre (reduced-motion,
+   gama baja o sin JS): entra con un fundido breve, no de golpe. */
+html:not([data-intro="activa"]) .cabecera-logo {
+  animation: aparecer-logo 0.5s ease-out both;
+}
+
+@keyframes aparecer-logo {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:not([data-intro="activa"]) .cabecera-logo {
+    animation: none;
+  }
+}
