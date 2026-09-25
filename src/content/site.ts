@@ -17,9 +17,9 @@ export const clinica = {
     ciudad: "Lima",
     pais: "Perú",
   },
-  telefono: null, // no consta en la carpeta del proyecto
-  whatsapp: null, // no consta en la carpeta del proyecto
-  email: null,
+  telefono: null, // no hay número fijo y no se atiende por ahí
+  whatsapp: "+51 985 996 818",
+  email: "contacto@arietanoova.pe",
   horarios: [
     {
       dia: "Lunes a viernes",
@@ -69,6 +69,71 @@ export const doctora = {
   cierre:
     "Esa trayectoria docente explica por qué una parte importante de los pacientes de ArietaNoova llega derivada por otros odontólogos. El colega que deriva conoce el criterio antes de conocer la clínica.",
 };
+
+export type Especialista = {
+  nombre: string;
+  especialidad: string;
+  tituloProfesional: string;
+  colegiatura: string;
+  rne?: string;
+  rneEstado: "vigente" | "en-tramite";
+};
+
+export const equipoEspecialistas: Especialista[] = [
+  {
+    nombre: "Dra. Jessica Margoth Arieta Miranda",
+    especialidad: "Ortodoncia y Ortopedia Maxilar",
+    tituloProfesional: "Especialista en Ortodoncia y Ortopedia Maxilar",
+    colegiatura: "COP 14814",
+    rne: "RNE 1525",
+    rneEstado: "vigente",
+  },
+  {
+    nombre: "Dra. Karen Julissa Ventura Asencios",
+    especialidad: "Rehabilitación Oral",
+    tituloProfesional: "Especialista en Rehabilitación Oral",
+    colegiatura: "COP 25869",
+    rne: "RNE 5119",
+    rneEstado: "vigente",
+  },
+  {
+    nombre: "Dr. Fernando Duani Montesinos Estaño",
+    especialidad: "Cirugía Máxilo Facial",
+    tituloProfesional: "Especialista en Cirugía Máxilo Facial",
+    colegiatura: "COP 18872",
+    rne: "RNE 1667",
+    rneEstado: "vigente",
+  },
+  {
+    nombre: "Dra. Zenaida Rojas Apaza",
+    especialidad: "Odontopediatría",
+    tituloProfesional: "Especialista en Odontopediatría",
+    colegiatura: "COP 24422",
+    rne: "RNE 2544",
+    rneEstado: "vigente",
+  },
+  {
+    nombre: "Dr. Carlos Diego Belsuzarri Victorio",
+    especialidad: "Endodoncia",
+    tituloProfesional: "Cirujano Dentista – Endodoncia",
+    colegiatura: "COP 36472",
+    rneEstado: "en-tramite",
+  },
+  {
+    nombre: "Dr. Ronald Walter Cáceres Villarreal",
+    especialidad: "Endodoncia",
+    tituloProfesional: "Cirujano Dentista – Endodoncia",
+    colegiatura: "COP 24837",
+    rneEstado: "en-tramite",
+  },
+  {
+    nombre: "Dr. Luis Alberto Maldonado Huamani",
+    especialidad: "Implantología",
+    tituloProfesional: "Cirujano Dentista – Implantología",
+    colegiatura: "COP 39491",
+    rneEstado: "en-tramite",
+  },
+];
 
 export type Especialidad = {
   slug: string;

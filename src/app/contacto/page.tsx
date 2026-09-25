@@ -2,7 +2,6 @@ import Image from "next/image";
 import type { Metadata } from "next";
 
 import Revelar from "@/components/Revelar";
-import Pendiente from "@/components/Pendiente";
 import FormularioContacto from "@/components/FormularioContacto";
 import { PortadaInterior } from "@/components/Piezas";
 import { clinica } from "@/content/site";
@@ -43,15 +42,24 @@ export default function Contacto() {
                 {clinica.direccion.pais}
               </address>
 
-              <h2 className="contacto-sub">Teléfono y WhatsApp</h2>
+              <h2 className="contacto-sub">Atención directa</h2>
               <p className="contacto-dato">
-                <Pendiente>teléfono fijo o celular de la clínica</Pendiente>
+                <a
+                  href="https://wa.me/51985996818?text=Hola%20ArietaNoova,%20deseo%20solicitar%20una%20evaluaci%C3%B3n"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "var(--verde-tinta)", fontWeight: 600, textDecoration: "underline" }}
+                >
+                  WhatsApp: +51 985 996 818
+                </a>
               </p>
-              <p className="contacto-dato">
-                <Pendiente>número de WhatsApp</Pendiente>
+              <p className="contacto-dato" style={{ fontSize: "0.875rem", opacity: 0.85, marginTop: "0.25rem" }}>
+                Atención exclusiva por WhatsApp (no contamos con central telefónica fija).
               </p>
-              <p className="contacto-dato">
-                <Pendiente>correo de contacto</Pendiente>
+              <p className="contacto-dato" style={{ marginTop: "0.5rem" }}>
+                <a href="mailto:contacto@arietanoova.pe" style={{ color: "var(--verde-tinta)" }}>
+                  contacto@arietanoova.pe
+                </a>
               </p>
 
               <h2 className="contacto-sub">Horarios</h2>
@@ -98,14 +106,8 @@ export default function Contacto() {
               referrerPolicy="no-referrer-when-downgrade"
             />
           </div>
-          <p className="pie-foto">
-            <Pendiente>
-              confirmar el pin exacto en Google Maps con la ficha de Google
-              Business de la clínica. El mapa se arma con la dirección escrita.
-            </Pendiente>
-          </p>
 
-          <div className="fachada">
+          <div className="fachada" style={{ marginTop: "2rem" }}>
             <div className="marco-foto fachada-foto">
               <Image
                 src="/fotos/fachada.jpg"
@@ -121,11 +123,7 @@ export default function Contacto() {
                 cuenta con ascensor.
               </p>
               <p className="pie-foto">
-                <Pendiente>
-                  el letrero de la fachada todavía dice «Arieta». La renovación
-                  con la marca ArietaNoova está pendiente; esta foto se reemplaza
-                  cuando esté instalado.
-                </Pendiente>
+                El letrero exterior actual conserva la marca previa («Arieta») y será renovado con la identidad ArietaNoova.
               </p>
             </div>
           </div>

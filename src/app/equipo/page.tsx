@@ -2,9 +2,8 @@ import Image from "next/image";
 import type { Metadata } from "next";
 
 import Revelar from "@/components/Revelar";
-import Pendiente from "@/components/Pendiente";
 import { Cierre } from "@/components/Piezas";
-import { doctora } from "@/content/site";
+import { doctora, equipoEspecialistas } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Equipo",
@@ -35,11 +34,7 @@ export default function SobreLaDoctora() {
               />
             </div>
             <p className="pie-foto">
-              <Pendiente>
-                confirmar que esta es la fotografía de la Dra. Jessica Arieta
-                Miranda. La sesión llegó sin identificar a las personas
-                retratadas.
-              </Pendiente>
+              Dra. Jessica Margoth Arieta Miranda — Directora Clínica (COP 14814 · RNE 1525)
             </p>
           </Revelar>
         </div>
@@ -88,14 +83,29 @@ export default function SobreLaDoctora() {
                 define el criterio con el que se planifica cada caso y el equipo
                 lo ejecuta dentro de su especialidad.
               </p>
-              <p className="pie-foto">
-                <Pendiente bloque>
-                  nombres, especialidad, colegiatura y fotografía individual de
-                  cada especialista. Tres de ellos tienen el RNE en trámite: hasta
-                  que salga deben presentarse como «Cirujano Dentista —
-                  [Especialidad]», no como «Especialista en».
-                </Pendiente>
-              </p>
+              <div className="equipo-lista" style={{ marginTop: "1.5rem", display: "grid", gap: "0.875rem" }}>
+                {equipoEspecialistas.map((esp) => (
+                  <div
+                    key={esp.nombre}
+                    className="tarjeta"
+                    style={{
+                      padding: "1rem 1.25rem",
+                      borderLeft: esp.rneEstado === "vigente" ? "3px solid var(--oro)" : "3px solid var(--verde)",
+                      background: "var(--oro-velo)",
+                    }}
+                  >
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: "0.5rem" }}>
+                      <strong style={{ fontSize: "1rem", color: "var(--verde-tinta)" }}>{esp.nombre}</strong>
+                      <span style={{ fontSize: "0.8125rem", fontWeight: 600, color: "var(--oro-tinta)" }}>
+                        {esp.colegiatura} {esp.rne ? `· ${esp.rne}` : "· RNE en trámite"}
+                      </span>
+                    </div>
+                    <p style={{ margin: "0.25rem 0 0", fontSize: "0.875rem", color: "var(--texto-atenuado)" }}>
+                      {esp.tituloProfesional}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </Revelar>
 
             <Revelar>

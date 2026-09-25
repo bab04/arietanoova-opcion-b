@@ -2,7 +2,6 @@ import Link from "next/link";
 
 import { marca } from "@/content/marca";
 import { clinica, NAVEGACION_PRINCIPAL, NAVEGACION_PIE } from "@/content/site";
-import Pendiente from "./Pendiente";
 
 export default function PieDePagina() {
   return (
@@ -55,10 +54,14 @@ export default function PieDePagina() {
               {clinica.direccion.pais}
             </address>
             <p className="pie-texto pie-dato">
-              <Pendiente>teléfono de la clínica</Pendiente>
-            </p>
-            <p className="pie-texto pie-dato">
-              <Pendiente>número de WhatsApp</Pendiente>
+              <a
+                href="https://wa.me/51985996818?text=Hola%20ArietaNoova,%20deseo%20solicitar%20informaci%C3%B3n"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "var(--oro-claro)", textDecoration: "underline" }}
+              >
+                WhatsApp: +51 985 996 818
+              </a>
             </p>
           </div>
 
