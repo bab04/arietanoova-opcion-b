@@ -433,9 +433,19 @@ a.tarjeta:hover {
   background: color-mix(in srgb, var(--crema) 92%, transparent);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  transition: background-color 0.2s ease;
+}
+
+.cabecera.cabecera-abierta {
+  z-index: 300;
+  background: var(--crema);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 .cabecera-fila {
+  position: relative;
+  z-index: 310;
   width: 100%;
   max-width: 1440px;
   margin-inline: auto;
@@ -522,6 +532,13 @@ a.tarjeta:hover {
   border-radius: var(--radio);
   cursor: pointer;
   color: inherit;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.cabecera-menu:hover,
+.cabecera-menu.abierto {
+  background: color-mix(in srgb, var(--verde) 8%, var(--crema));
+  border-color: var(--verde);
 }
 
 .cabecera-menu span[aria-hidden] {
@@ -532,13 +549,14 @@ a.tarjeta:hover {
 
 .cabecera-menu i {
   display: block;
-  height: 1.5px;
+  height: 2px;
   background: var(--verde);
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  border-radius: 1px;
+  transition: transform 0.25s ease, opacity 0.2s ease;
 }
 
 .cabecera-menu .cruz i:nth-child(1) {
-  transform: translateY(5.5px) rotate(45deg);
+  transform: translateY(6px) rotate(45deg);
 }
 
 .cabecera-menu .cruz i:nth-child(2) {
@@ -546,7 +564,7 @@ a.tarjeta:hover {
 }
 
 .cabecera-menu .cruz i:nth-child(3) {
-  transform: translateY(-5.5px) rotate(-45deg);
+  transform: translateY(-6px) rotate(-45deg);
 }
 
 @media (min-width: 640px) {
@@ -578,13 +596,74 @@ a.tarjeta:hover {
   position: fixed;
   inset: 0;
   top: 0;
-  z-index: 120;
+  z-index: 290;
   background: var(--crema);
-  padding: 7rem var(--gutter) 2rem;
+  padding: calc(84px + 1rem) var(--gutter) 2.5rem;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (min-width: 1140px) {
+  .movil {
+    padding-top: calc(105px + 1rem);
+  }
+}
+
+.movil-barra-volver {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.25rem 0 1rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--oro-linea);
+}
+
+.movil-btn-regresar {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: color-mix(in srgb, var(--verde) 6%, transparent);
+  border: 1px solid var(--oro-linea);
+  color: var(--verde-tinta);
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radio);
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.movil-btn-regresar:hover,
+.movil-btn-regresar:active {
+  background: color-mix(in srgb, var(--verde) 12%, transparent);
+  border-color: var(--verde);
+  transform: translateX(-2px);
+}
+
+.movil-btn-regresar svg {
+  flex: none;
+  stroke: var(--oro-tinta);
+}
+
+.movil-indicador-menu {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--oro-tinta);
+  font-weight: 500;
+}
+
+body.menu-abierto .intro-overlay {
+  display: none !important;
+}
+
+body.menu-abierto .wa {
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 .movil nav {

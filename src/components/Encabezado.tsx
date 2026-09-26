@@ -12,9 +12,6 @@ import { clinica, NAVEGACION_PRINCIPAL, NAVEGACION_PIE } from "@/content/site";
  *
  * Estructura fijada en web/lib/rutas.ts (NAVEGACION_PRINCIPAL). No se añaden,
  * renombran ni quitan entradas aquí: se editan en src/content/site.ts.
- *
- * El teléfono va visible en la barra y FUERA del menú hamburguesa: el 68 % del
- * tráfico de la clínica es móvil y llamar es el camino de contacto más corto.
  */
 export default function Encabezado() {
   const ruta = usePathname();
@@ -25,24 +22,37 @@ export default function Encabezado() {
   }, [ruta]);
 
   useEffect(() => {
-    document.body.style.overflow = abierto ? "hidden" : "";
+    if (abierto) {
+      document.body.classList.add("menu-abierto");
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.classList.remove("menu-abierto");
+      document.body.style.overflow = "";
+    }
     return () => {
+      document.body.classList.remove("menu-abierto");
       document.body.style.overflow = "";
     };
   }, [abierto]);
 
-  const telefono = clinica.telefono as string | null;
+  useEffect(() => {
+    const alPresionarTecla = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setAbierto(false);
+    };
+    window.addEventListener("keydown", alPresionarTecla);
+    return () => window.removeEventListener("keydown", alPresionarTecla);
+  }, []);
 
   return (
-    <header className="cabecera">
+    <header className={`cabecera ${abierto ? "cabecera-abierta" : ""}`}>
       <div className="cabecera-fila">
-        {/* El logo ES el enlace a inicio. No existe un ítem "Inicio" en el menú.
-            #ancla-logo es además el destino de la animación de entrada. */}
+        {/* El logo ES el enlace a inicio. Tocarlo además cierra el menú móvil si estaba abierto. */}
         <Link
           href="/"
           id="ancla-logo"
           className="cabecera-logo"
           aria-label={`${clinica.marca}, ir al inicio`}
+          onClick={() => setAbierto(false)}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -70,35 +80,21 @@ export default function Encabezado() {
         </nav>
 
         <div className="cabecera-acciones">
-          {/* Teléfono siempre visible, nunca dentro del hamburguesa */}
-          {telefono ? (
-            <a className="cabecera-tel" href={`tel:${telefono.replace(/\s/g, "")}`}>
-              <IconoTelefono />
-              <span>{telefono}</span>
-            </a>
-          ) : (
-            <span className="cabecera-tel cabecera-tel-pendiente">
-              <IconoTelefono />
-              <span>
-                Teléfono
-                <small>PENDIENTE</small>
-              </span>
-            </span>
-          )}
-
           <Link href="/contacto" className="boton boton-oro cabecera-cta">
             Solicitar evaluación
           </Link>
 
           <button
             type="button"
-            className="cabecera-menu"
+            className={`cabecera-menu ${abierto ? "abierto" : ""}`}
             aria-expanded={abierto}
             aria-controls="menu-movil"
+            aria-label={abierto ? "Cerrar menú y regresar" : "Abrir menú de navegación"}
+            title={abierto ? "Regresar al sitio" : "Abrir menú"}
             onClick={() => setAbierto((v) => !v)}
           >
             <span className="solo-lectores">
-              {abierto ? "Cerrar menú" : "Abrir menú"}
+              {abierto ? "Cerrar menú y regresar" : "Abrir menú"}
             </span>
             <span aria-hidden="true" className={abierto ? "cruz" : "barras"}>
               <i />
@@ -112,10 +108,47 @@ export default function Encabezado() {
       <hr className="filete" />
 
       {abierto && (
-        <div className="movil" id="menu-movil">
+        <div
+          className="movil"
+          id="menu-movil"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menú de navegación"
+        >
+          {/* Botón explícito para regresar en celular */}
+          <div className="movil-barra-volver">
+            <button
+              type="button"
+              className="movil-btn-regresar"
+              onClick={() => setAbierto(false)}
+              aria-label="Regresar al sitio y cerrar menú"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+              </svg>
+              <span>Regresar</span>
+            </button>
+            <span className="movil-indicador-menu">Navegación</span>
+          </div>
+
           <nav aria-label="Principal (móvil)">
             {NAVEGACION_PRINCIPAL.map((i) => (
-              <Link key={i.href} href={i.href} className="movil-enlace">
+              <Link
+                key={i.href}
+                href={i.href}
+                className="movil-enlace"
+                onClick={() => setAbierto(false)}
+              >
                 {i.etiqueta}
               </Link>
             ))}
@@ -124,28 +157,26 @@ export default function Encabezado() {
           <p className="movil-titulo">Además</p>
           <nav aria-label="Secundaria (móvil)" className="movil-secundaria">
             {NAVEGACION_PIE.map((i) => (
-              <Link key={i.href} href={i.href} className="movil-enlace-menor">
+              <Link
+                key={i.href}
+                href={i.href}
+                className="movil-enlace-menor"
+                onClick={() => setAbierto(false)}
+              >
                 {i.etiqueta}
               </Link>
             ))}
           </nav>
 
-          <Link href="/contacto" className="boton boton-oro movil-cta">
+          <Link
+            href="/contacto"
+            className="boton boton-oro movil-cta"
+            onClick={() => setAbierto(false)}
+          >
             Solicitar evaluación
           </Link>
         </div>
       )}
     </header>
-  );
-}
-
-function IconoTelefono() {
-  return (
-    <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true">
-      <path
-        fill="currentColor"
-        d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2Z"
-      />
-    </svg>
   );
 }
