@@ -620,3 +620,27 @@
   text-decoration: none;
   border-bottom: 1px solid color-mix(in srgb, var(--verde) 10%, transparent);
 }
+
+/* ---------------------- acordeón desplegable especialistas ----------- */
+
+@keyframes desplegarSuave {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.oculto-movil {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .oculto-movil {
+    display: inline;
+  }
+}
+

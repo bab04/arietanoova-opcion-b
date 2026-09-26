@@ -71,67 +71,169 @@ export const doctora = {
 };
 
 export type Especialista = {
+  id: string;
   nombre: string;
   especialidad: string;
   tituloProfesional: string;
   colegiatura: string;
   rne?: string;
-  rneEstado: "vigente" | "en-tramite";
+  foto?: string;
+  enfoque: string;
+  procedimientos: string[];
+  formacion: string[];
 };
 
 export const equipoEspecialistas: Especialista[] = [
   {
+    id: "dra-jessica-arieta",
     nombre: "Dra. Jessica Margoth Arieta Miranda",
     especialidad: "Ortodoncia y Ortopedia Maxilar",
     tituloProfesional: "Especialista en Ortodoncia y Ortopedia Maxilar",
     colegiatura: "COP 14814",
     rne: "RNE 1525",
-    rneEstado: "vigente",
+    foto: "/fotos/doctora-retrato.jpg",
+    enfoque:
+      "Directora clínica de ArietaNoova. 25 años de ejercicio clínico continuo y formación universitaria en San Marcos y Wiener. Especialista en la resolución de casos de alta complejidad.",
+    procedimientos: [
+      "Ortodoncia correctiva con brackets estéticos y autoligables",
+      "Ortopedia maxilar y corrección del crecimiento en maxilares",
+      "Alineadores transparentes y planificación 3D con escáner intraoral",
+      "Casos ortodóncico-quirúrgicos complejos derivados por colegas",
+    ],
+    formacion: [
+      "Cirujano Dentista, Titulación 2001 (25 años de ejercicio continuo)",
+      "Especialista en Ortodoncia y Ortopedia Maxilar (desde 2013 · RNE 1525)",
+      "Más de 10 años docente en UNMSM y 4 años en Universidad Wiener",
+    ],
   },
   {
+    id: "dr-diego-belsuzarri",
+    nombre: "Dr. Carlos Diego Belsuzarri Victorio",
+    especialidad: "Endodoncia",
+    tituloProfesional: "Cirujano Dentista – Endodoncia",
+    colegiatura: "COP 36472",
+    foto: "/fotos/dr-diego-belsuzarri.jpg",
+    enfoque:
+      "Dedicado exclusivamente a la conservación de piezas dentales comprometidas y alivio del dolor agudo mediante instrumentación biomecánica rotatoria avanzada y magnificación clínica.",
+    procedimientos: [
+      "Tratamientos de conductos (endodoncia) en sesión única sin dolor",
+      "Retratamientos de conductos en piezas con infecciones previas",
+      "Manejo de dolor dental agudo, pulpitis y urgencias dentales",
+      "Desinfección mecanizada y sellado tridimensional de conductos",
+    ],
+    formacion: [
+      "Cirujano Dentista (COP 36472)",
+      "Posgrado en Endodoncia clínica y microcirugía apical",
+      "Entrenamiento continuo en sistemas rotatorios y localizadores apicales",
+    ],
+  },
+  {
+    id: "dra-karen-ventura",
     nombre: "Dra. Karen Julissa Ventura Asencios",
     especialidad: "Rehabilitación Oral",
     tituloProfesional: "Especialista en Rehabilitación Oral",
     colegiatura: "COP 25869",
     rne: "RNE 5119",
-    rneEstado: "vigente",
+    foto: "/fotos/dra-especialista-clinica.jpg",
+    enfoque:
+      "Dedicada a la reconstrucción estética y funcional de la sonrisa a través de carillas cerámicas de mínima invasión, coronas libres de metal y prótesis de alta precisión.",
+    procedimientos: [
+      "Diseño de sonrisa y carillas cerámicas de mínima preparación",
+      "Coronas estéticas de zirconio y disilicato de litio (E-max)",
+      "Rehabilitación fija y prótesis sobre implantes dentales",
+      "Diagnóstico oclusal y tratamiento de desgaste dental severo",
+    ],
+    formacion: [
+      "Cirujano Dentista (COP 25869)",
+      "Especialista en Rehabilitación Oral (RNE 5119)",
+      "Formación especializada en estética adhesiva y oclusión",
+    ],
   },
   {
-    nombre: "Dr. Fernando Duani Montesinos Estaño",
-    especialidad: "Cirugía Máxilo Facial",
-    tituloProfesional: "Especialista en Cirugía Máxilo Facial",
-    colegiatura: "COP 18872",
-    rne: "RNE 1667",
-    rneEstado: "vigente",
-  },
-  {
+    id: "dra-zenaida-rojas",
     nombre: "Dra. Zenaida Rojas Apaza",
     especialidad: "Odontopediatría",
     tituloProfesional: "Especialista en Odontopediatría",
     colegiatura: "COP 24422",
     rne: "RNE 2544",
-    rneEstado: "vigente",
+    foto: "/fotos/dra-odontopediatria.jpg",
+    enfoque:
+      "Cuidado integral de la salud bucal en bebés, niños y adolescentes, transformando la visita al dentista en una experiencia agradable y positiva mediante técnicas de manejo conductual respetuoso.",
+    procedimientos: [
+      "Odontología preventiva, flúor barniz y sellantes protectores",
+      "Tratamiento de caries de la primera infancia y pulpotomías",
+      "Guía de erupción dentaria y ortopedia interceptiva infantil",
+      "Adaptación conductual para primeras visitas y niños temerosos",
+    ],
+    formacion: [
+      "Cirujano Dentista (COP 24422)",
+      "Especialista en Odontopediatría (RNE 2544)",
+      "Entrenamiento hospitalario en odontología pediátrica y prevención",
+    ],
   },
   {
-    nombre: "Dr. Carlos Diego Belsuzarri Victorio",
-    especialidad: "Endodoncia",
-    tituloProfesional: "Cirujano Dentista – Endodoncia",
-    colegiatura: "COP 36472",
-    rneEstado: "en-tramite",
+    id: "dr-fernando-montesinos",
+    nombre: "Dr. Fernando Duani Montesinos Estaño",
+    especialidad: "Cirugía Máxilo Facial",
+    tituloProfesional: "Especialista en Cirugía Máxilo Facial",
+    colegiatura: "COP 18872",
+    rne: "RNE 1667",
+    foto: "/fotos/dr-fernando-montesinos.jpg",
+    enfoque:
+      "Especialista en cirugía bucomaxilofacial de alta complejidad, extracción de piezas retenidas y planificación conjunta ortodóncico-quirúrgica.",
+    procedimientos: [
+      "Extracción quirúrgica atraumática de terceras molares (muelas del juicio)",
+      "Cirugía de piezas dentarias retenidas o incluidas",
+      "Planificación y evaluación ortognática junto a Ortodoncia",
+      "Frenectomías linguales y labiales con cicatrización rápida",
+    ],
+    formacion: [
+      "Cirujano Dentista (COP 18872)",
+      "Especialista en Cirugía Bucal y Máxilo Facial (RNE 1667)",
+      "Entrenamiento quirúrgico hospitalario",
+    ],
   },
   {
-    nombre: "Dr. Ronald Walter Cáceres Villarreal",
-    especialidad: "Endodoncia",
-    tituloProfesional: "Cirujano Dentista – Endodoncia",
-    colegiatura: "COP 24837",
-    rneEstado: "en-tramite",
-  },
-  {
+    id: "dr-luis-maldonado",
     nombre: "Dr. Luis Alberto Maldonado Huamani",
     especialidad: "Implantología",
     tituloProfesional: "Cirujano Dentista – Implantología",
     colegiatura: "COP 39491",
-    rneEstado: "en-tramite",
+    foto: "/fotos/dr-luis-maldonado.jpg",
+    enfoque:
+      "Dedicado a la reposición de piezas dentarias ausentes mediante implantes dentales osteointegrados y regeneración ósea guiada con tecnología 3D.",
+    procedimientos: [
+      "Colocación de implantes dentales unitarios y múltiples",
+      "Regeneración ósea guiada y elevación de seno maxilar",
+      "Cirugía guiada por tomografía tridimensional",
+      "Preservación de hueso alveolar post-extracción",
+    ],
+    formacion: [
+      "Cirujano Dentista (COP 39491)",
+      "Especialización en Implantología Oral y Cirugía",
+      "Certificación en planificación quirúrgica tridimensional",
+    ],
+  },
+  {
+    id: "dr-ronald-caceres",
+    nombre: "Dr. Ronald Walter Cáceres Villarreal",
+    especialidad: "Endodoncia",
+    tituloProfesional: "Cirujano Dentista – Endodoncia",
+    colegiatura: "COP 24837",
+    foto: "/fotos/dr-ronald-caceres.jpg",
+    enfoque:
+      "Cirujano dentista dedicado al salvamento de piezas dentales naturales mediante endodoncia conservadora, desinfección profunda y reconstrucción biocompatible.",
+    procedimientos: [
+      "Endodoncia en molares y premolares complejas",
+      "Diagnóstico diferencial de dolor periapical y pulpitis",
+      "Desinfección mecanizada y sellado termoplástico",
+      "Reconstrucción dental con postes de fibra de vidrio",
+    ],
+    formacion: [
+      "Cirujano Dentista (COP 24837)",
+      "Entrenamiento de posgrado en Endodoncia clínica",
+      "Amplia trayectoria dedicada a la terapia de conductos",
+    ],
   },
 ];
 

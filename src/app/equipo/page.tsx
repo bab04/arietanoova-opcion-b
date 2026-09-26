@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { Metadata } from "next";
 
+import DesplegableEspecialistas from "@/components/DesplegableEspecialistas";
 import Revelar from "@/components/Revelar";
 import { Cierre } from "@/components/Piezas";
 import { doctora, equipoEspecialistas } from "@/content/site";
@@ -8,7 +9,7 @@ import { doctora, equipoEspecialistas } from "@/content/site";
 export const metadata: Metadata = {
   title: "Equipo",
   description:
-    "El equipo de ArietaNoova: la Dra. Jessica Arieta Miranda — 25 años como cirujano dentista, especialista en ortodoncia y ortopedia maxilar desde 2013, docente en la UNMSM y en la Universidad Wiener — y los seis especialistas de la clínica.",
+    "El equipo de ArietaNoova: la Dra. Jessica Arieta Miranda — 25 años como cirujano dentista, especialista en ortodoncia y ortopedia maxilar desde 2013, docente en la UNMSM y en la Universidad Wiener — y los especialistas de la clínica.",
   alternates: { canonical: "/equipo" },
 };
 
@@ -76,46 +77,30 @@ export default function SobreLaDoctora() {
         <div className="envoltura">
           <div className="equipo-rejilla">
             <Revelar>
-              <p className="antetitulo">El equipo</p>
-              <h2 className="display-m">Seis especialistas y un mismo criterio</h2>
+              <p className="antetitulo">El equipo médico</p>
+              <h2 className="display-m">Especialistas coordinados bajo un mismo criterio</h2>
               <p className="bajada">
-                La clínica trabaja con seis especialistas. La dirección clínica
-                define el criterio con el que se planifica cada caso y el equipo
-                lo ejecuta dentro de su especialidad.
+                La dirección clínica define el criterio con el que se planifica cada caso y el equipo
+                lo ejecuta dentro de su especialidad. Haga clic en cada especialista para conocer su trayectoria, enfoque y procedimientos.
               </p>
-              <div className="equipo-lista" style={{ marginTop: "1.5rem", display: "grid", gap: "0.875rem" }}>
-                {equipoEspecialistas.map((esp) => (
-                  <div
-                    key={esp.nombre}
-                    className="tarjeta"
-                    style={{
-                      padding: "1rem 1.25rem",
-                      borderLeft: esp.rneEstado === "vigente" ? "3px solid var(--oro)" : "3px solid var(--verde)",
-                      background: "var(--oro-velo)",
-                    }}
-                  >
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: "0.5rem" }}>
-                      <strong style={{ fontSize: "1rem", color: "var(--verde-tinta)" }}>{esp.nombre}</strong>
-                      <span style={{ fontSize: "0.8125rem", fontWeight: 600, color: "var(--oro-tinta)" }}>
-                        {esp.colegiatura} {esp.rne ? `· ${esp.rne}` : "· RNE en trámite"}
-                      </span>
-                    </div>
-                    <p style={{ margin: "0.25rem 0 0", fontSize: "0.875rem", color: "var(--texto-atenuado)" }}>
-                      {esp.tituloProfesional}
-                    </p>
-                  </div>
-                ))}
+              <div style={{ marginTop: "1.5rem" }}>
+                <DesplegableEspecialistas especialistas={equipoEspecialistas} />
               </div>
             </Revelar>
 
             <Revelar>
-              <div className="marco-foto equipo-foto">
-                <Image
-                  src="/fotos/equipo-recepcion.jpg"
-                  alt="Equipo de ArietaNoova en la recepción de la clínica"
-                  fill
-                  sizes="(max-width: 900px) 100vw, 50vw"
-                />
+              <div style={{ position: "sticky", top: "100px" }}>
+                <div className="marco-foto equipo-foto">
+                  <Image
+                    src="/fotos/equipo-recepcion.jpg"
+                    alt="Equipo de ArietaNoova en la recepción de la clínica"
+                    fill
+                    sizes="(max-width: 900px) 100vw, 50vw"
+                  />
+                </div>
+                <p className="pie-foto" style={{ marginTop: "0.75rem" }}>
+                  Equipo clínico multidisciplinario en las instalaciones de ArietaNoova.
+                </p>
               </div>
             </Revelar>
           </div>
