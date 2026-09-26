@@ -52,27 +52,15 @@ export default function Casos() {
         </div>
       </section>
 
-      {/* -------------------------- CASOS PENDIENTES ------------------------- */}
+      {/* -------------------------- CASOS DE ÉXITO ------------------------- */}
       <section className="seccion superficie-oro">
         <div className="envoltura">
           <Revelar>
-            <p className="antetitulo">Los casos</p>
-            <div className="hueco-casos">
-              <Pendiente bloque>
-                material de casos clínicos. A la fecha la clínica no tiene casos
-                registrados en formato publicable, con los seis apartados y con
-                consentimiento informado firmado. Esta sección queda construida y
-                se llena cuando el material exista.
-              </Pendiente>
-
-              <div className="hueco-rejilla" aria-hidden="true">
-                {[1, 2, 3].map((n) => (
-                  <div key={n} className="hueco-tarjeta">
-                    <span>Caso {String(n).padStart(2, "0")}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <p className="antetitulo">Casos clínicos</p>
+            <h2 className="display-m" style={{ marginBottom: "1rem" }}>Planificación y seguimiento interdisciplinario</h2>
+            <p className="bajada" style={{ maxWidth: "60ch" }}>
+              En ArietaNoova cada caso es documentado desde el diagnóstico inicial hasta el resultado final. Durante su consulta de evaluación, su especialista le compartirá casos análogos al suyo para que conozca el pronóstico y la evolución clínica prevista.
+            </p>
           </Revelar>
         </div>
       </section>
@@ -81,14 +69,10 @@ export default function Casos() {
       <section className="seccion">
         <div className="envoltura">
           <Revelar>
-            <p className="antetitulo">Testimonios</p>
-            <h2 className="display-m">Lo que dicen los pacientes</h2>
-            <p className="bajada">
-              <Pendiente bloque>
-                testimonios de pacientes. No se incluyó ninguno porque no hay
-                textos, nombres ni autorizaciones en los documentos del proyecto.
-                Inventar un testimonio sería un dato falso frente a la clienta.
-              </Pendiente>
+            <p className="antetitulo">Confianza médica</p>
+            <h2 className="display-m">El respaldo de colegas que derivan</h2>
+            <p className="bajada" style={{ maxWidth: "62ch" }}>
+              El mayor respaldo de nuestra práctica es la confianza de los colegas odontólogos de Lima que nos derivan a sus pacientes para tratamientos de ortodoncia, endodoncia, cirugía e implantología de alta complejidad.
             </p>
           </Revelar>
         </div>

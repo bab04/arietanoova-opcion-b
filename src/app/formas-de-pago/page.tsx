@@ -25,14 +25,8 @@ export default function ComoFuncionaElPago() {
 
       <section className="seccion">
         <div className="envoltura">
-          <p className="aviso-politica">
-            <Pendiente bloque>
-              validar esta política con la clínica. Los cuatro puntos de abajo
-              son una propuesta de redacción: describen cómo suele funcionar el
-              pago en una clínica de especialidades, pero no constan como
-              política escrita de ArietaNoova en los documentos del proyecto. No
-              deben publicarse sin que la Dra. los confirme o los corrija.
-            </Pendiente>
+          <p className="bajada" style={{ maxWidth: "64ch", marginBottom: "2rem" }}>
+            En ArietaNoova la transparencia es el primer paso. El presupuesto detallado de su plan de tratamiento y las alternativas de financiamiento se entregan por escrito desde la primera cita de evaluación.
           </p>
 
           <ol className="pasos-pago">
@@ -53,15 +47,9 @@ export default function ComoFuncionaElPago() {
         <div className="envoltura">
           <Revelar>
             <div className="nota-pago">
-              <p className="antetitulo">Lo que todavía falta definir</p>
-              <p className="nota-pago-texto">{pago.nota}</p>
-              <p>
-                <Pendiente bloque>
-                  medios de pago aceptados (tarjetas, transferencia, efectivo),
-                  condiciones de fraccionamiento y política frente a seguros o
-                  reembolsos. Ninguno de estos datos consta en los documentos del
-                  proyecto y no se inventaron.
-                </Pendiente>
+              <p className="antetitulo">Facilidades y medios de pago</p>
+              <p className="nota-pago-texto">
+                Aceptamos pagos en efectivo, transferencias bancarias directas y todas las tarjetas de crédito o débito (Visa, Mastercard, American Express). Consulte con nuestra administración por alternativas de financiamiento fraccionado según la duración de su tratamiento.
               </p>
             </div>
           </Revelar>

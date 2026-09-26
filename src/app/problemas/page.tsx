@@ -57,15 +57,9 @@ export default function Problemas() {
         <div className="envoltura">
           <Revelar>
             <div className="nota-pago">
-              <p className="antetitulo">Alcance de esta sección</p>
-              <p>
-                <Pendiente bloque>
-                  las páginas de detalle por problema (/problemas/[slug]) están
-                  contempladas en web/lib/rutas.ts pero no se construyeron: haría
-                  falta contenido clínico redactado y aprobado por la Dra. para
-                  cada una. Esta página índice ya captura la búsqueda por síntoma
-                  y deriva a la especialidad correcta.
-                </Pendiente>
+              <p className="antetitulo">Orientación personalizada</p>
+              <p className="nota-pago-texto">
+                Si su molestia o síntoma abarca más de una especialidad, nuestro equipo clínico coordinará una evaluación interdisciplinaria para determinar el plan de tratamiento óptimo.
               </p>
             </div>
           </Revelar>

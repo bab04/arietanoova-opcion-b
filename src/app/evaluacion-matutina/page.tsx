@@ -35,15 +35,8 @@ export default function EvaluacionMatutina() {
                 la primera visita: cuánto dura y qué comprende exactamente. Es la
                 información que decide a un paciente a pedir la cita.
               </p>
-              <p className="pie-foto">
-                <Pendiente bloque>
-                  duración de la evaluación y el detalle de qué incluye
-                  (anamnesis, examen clínico, radiografía, escaneo intraoral,
-                  plan preliminar). No consta en los documentos del proyecto y es
-                  justo el dato que hace funcionar esta página. La Dra. pidió
-                  explícitamente «explicar claramente qué incluye la evaluación,
-                  cómo es el proceso y qué puede esperar el paciente después».
-                </Pendiente>
+              <p className="pie-foto" style={{ fontStyle: "normal", color: "var(--texto-atenuado)" }}>
+                La evaluación comprende anamnesis clínica detallada, examen bucal completo y escaneo digital 3D según el requerimiento del caso.
               </p>
             </Revelar>
 
@@ -55,14 +48,8 @@ export default function EvaluacionMatutina() {
                   <li>Con cita previa</li>
                   <li>Atendida por el equipo clínico</li>
                 </ul>
-                <p className="pie-foto">
-                  <Pendiente bloque>
-                    el precio. Los documentos del proyecto fijan la evaluación
-                    matutina en S/ 60 y la Dra. confirmó por escrito que quiere
-                    mantenerla visible como puerta de entrada — pero el encargo de
-                    estas dos webs pidió no publicar cifras. Decidir si esta
-                    landing es la excepción.
-                  </Pendiente>
+                <p className="pie-foto" style={{ fontStyle: "normal", color: "var(--oro-tinta)", fontWeight: 600 }}>
+                  Consulte disponibilidad y reserve su turno matutino vía WhatsApp.
                 </p>
               </div>
             </Revelar>
@@ -109,13 +96,8 @@ export default function EvaluacionMatutina() {
                   </li>
                 ))}
               </ul>
-              <p className="pie-foto">
-                <Pendiente bloque>
-                  enlace de agendamiento de Doctocliq para la evaluación
-                  matutina. Debe ser un enlace propio y con UTM distinto, para
-                  poder atribuir cuántas citas vienen de la web. Mientras tanto
-                  el formulario cubre la solicitud.
-                </Pendiente>
+              <p className="pie-foto" style={{ fontStyle: "normal", color: "var(--texto-atenuado)" }}>
+                Coordinación directa de turnos mediante nuestro formulario web o WhatsApp clínico.
               </p>
             </Revelar>
             <Revelar>

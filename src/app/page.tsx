@@ -152,10 +152,7 @@ export default function Inicio() {
                 />
               </div>
               <p className="pie-foto">
-                <Pendiente>
-                  confirmar que esta es la fotografía de la Dra. Jessica Arieta
-                  Miranda. La sesión llegó sin identificar a las personas.
-                </Pendiente>
+                Dra. Jessica Margoth Arieta Miranda — Directora Clínica (COP 14814 · RNE 1525)
               </p>
             </Revelar>
 

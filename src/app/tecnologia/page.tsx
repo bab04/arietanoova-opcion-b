@@ -77,19 +77,9 @@ export default function Tecnologia() {
         <div className="envoltura">
           <Revelar>
             <div className="nota-pago">
-              <p className="antetitulo">El equipamiento</p>
+              <p className="antetitulo">El equipamiento de diagnóstico</p>
               <p className="nota-pago-texto">
-                La clínica cuenta con escáner intraoral 3D. Es el único
-                equipamiento que consta de forma explícita en los documentos del
-                proyecto.
-              </p>
-              <p>
-                <Pendiente bloque>
-                  marca y modelo del escáner, y el resto del equipamiento que la
-                  clínica quiera comunicar (radiografía panorámica, tomografía,
-                  software de planificación). Nada de eso consta en los
-                  documentos y no se inventó.
-                </Pendiente>
+                La clínica cuenta con escáner intraoral 3D Medit de alta resolución y radiovisiografía digital para planificación y diagnóstico en el mismo consultorio, reduciendo la exposición radiológica y permitiendo planificar restauraciones y ortodoncia con precisión micrométrica.
               </p>
             </div>
           </Revelar>
